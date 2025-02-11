@@ -1,11 +1,9 @@
 import React from "react";
-import { Link } from "@tanstack/react-router";
 import CharacterList from "./CharacterList";
 
 interface CharacterProfileProps {
   image: string;
-  name: string;
-  id: string; 
+  name: string; 
   tvShows: string[];
   films: string[];
   shortFilms: string[];
@@ -17,8 +15,7 @@ interface CharacterProfileProps {
 
 const CharacterCard: React.FC<CharacterProfileProps> = ({ 
     image, 
-    name, 
-    id, 
+    name,  
     tvShows, 
     films, 
     shortFilms, 
