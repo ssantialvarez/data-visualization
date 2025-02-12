@@ -9,7 +9,7 @@ function RouteComponent() {
   return (
     <>
       <Navbar />
-      <div className="pb-16"></div>
+      <div className="sm:pb-32 md:pb-16"></div>
       <Outlet/>
     </>
   )
