@@ -1,20 +1,20 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import SearchBar from "./SearchBar";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getFilteredDisneyCharacters } from "../services/disneyService";
-
+import { useEffect, useState } from "react";
 
 const Navbar = (): React.JSX.Element => {
   const [value, setValue] = useState("");
-  const queryInfo = useQuery({
-    queryKey: ["widgets", value], 
-    queryFn: () => getFilteredDisneyCharacters({ name: value }), 
-    enabled: Boolean(value), 
-  }
-  );
-  console.log(queryInfo.data)
-  return (
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const getData = setTimeout(() => {
+      navigate({to:'/characters', search:{ name: value }})
+    }, 500)
+
+    return () => clearTimeout(getData)
+  }, [value])
+
+return (
     <nav className="fixed top-0 left-0 right-0 bg-snow shadow-md opacity-95 z-10">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="relative flex sm:max-h-32 md:h-16 items-center justify-center">

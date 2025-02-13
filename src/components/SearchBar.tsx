@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+
 import { motion } from "framer-motion";
 import { ChevronDown, Search } from "lucide-react";
 import { useState } from "react";
@@ -6,6 +6,8 @@ import { useState } from "react";
 const SearchBar = ({ onSubmit }: { onSubmit: (value: string) => {} }): React.JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
+  
+
   return (
     <>
      <form
@@ -15,13 +17,7 @@ const SearchBar = ({ onSubmit }: { onSubmit: (value: string) => {} }): React.JSX
         onSubmit(value);
       }}
     >
-        <Link
-          to="/characters"
-          search={{name: value}}
-        >
         <Search />
-        </Link>
-        
       
         <input
         value={value}

@@ -42,17 +42,6 @@ export const getDisneyCharacters = async ({
   }
 };
 
-
-export const getFilteredDisneyCharacters = async ({ name } : { name: string }) => {
-  try {
-    const response = await axios.get(`${API_URL}?name=${name}`);
-    return response.data; 
-  } catch (error) {
-    console.error("Error fetching Disney characters:", error);
-    return { data: [], info: {} };
-  }
-};
-
 export const getDisneyCharacterById = async (charId: string) => {
   try {
     const response = await axios.get(`${API_URL}/${charId}`);
