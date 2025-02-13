@@ -8,7 +8,8 @@ const Navbar = (): React.JSX.Element => {
 
   useEffect(() => {
     const getData = setTimeout(() => {
-      navigate({to:'/characters', search:{ name: value }})
+      if(value)
+        navigate({to:'/characters', search:{ name: value }})
     }, 500)
 
     return () => clearTimeout(getData)

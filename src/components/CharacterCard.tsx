@@ -43,10 +43,9 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ image, name, id, tvShows,
                 </div>
             </div>
 
-            {/* Details button (centrado y al final) */}
             <div className="self-center pb-4">
                 <Link to={'/characters/' + id}>
-                <Button disabled={false} title="See details..." />
+                <Button  disabled={false} title="See details..." />
                 </Link>
             </div>
             </div>
