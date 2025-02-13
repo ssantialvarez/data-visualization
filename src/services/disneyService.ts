@@ -2,29 +2,40 @@ import axios from "axios";
 
 const API_URL = "https://api.disneyapi.dev/character";
 
-export const getDisneyCharacters = async ({ pageParam = 1, name, film, tvShow, shortFilm, parkAttraction, videoGame }: { 
-  pageParam: number, 
-  name?: string, 
-  film?: string, 
-  tvShow?: string, 
-  shortFilm?: string,
-  parkAttraction?: string, 
-  videoGame?: string  
+export const getDisneyCharacters = async ({
+  pageParam = 1,
+  name,
+  film,
+  tvShow,
+  shortFilm,
+  parkAttraction,
+  videoGame,
+}: {
+  pageParam: number;
+  name?: string;
+  film?: string;
+  tvShow?: string;
+  shortFilm?: string;
+  parkAttraction?: string;
+  videoGame?: string;
 }) => {
-  let url = `${API_URL}?page=${pageParam}&pageSize=48`
-  name = name ? `&name=${name}` : ''
-  film = film ? `&films=${film}` : ''
-  tvShow = tvShow ? `&tvShows=${tvShow}` : ''
-  shortFilm = shortFilm ? `&shortFilms=${shortFilm}` : ''
-  parkAttraction = parkAttraction ? `&parkAttractions=${parkAttraction}` : ''
-  videoGame = videoGame ? `&videoGames=${videoGame}` : ''
+  const params = new URLSearchParams({
+    page: pageParam.toString(),
+    pageSize: "48",
+  });
 
-  url = url + name + film + tvShow + shortFilm + parkAttraction + videoGame
-  
-  console.log(url)
+  if (name) params.append("name", name);
+  if (film) params.append("films", film);
+  if (tvShow) params.append("tvShows", tvShow);
+  if (shortFilm) params.append("shortFilms", shortFilm);
+  if (parkAttraction) params.append("parkAttractions", parkAttraction);
+  if (videoGame) params.append("videoGames", videoGame);
+
+  const url = `${API_URL}?${params.toString()}`;
+
   try {
     const response = await axios.get(url);
-    return response.data; 
+    return response.data;
   } catch (error) {
     console.error("Error fetching Disney characters:", error);
     return { data: [], info: {} };
