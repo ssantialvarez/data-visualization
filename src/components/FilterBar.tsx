@@ -27,9 +27,9 @@ return (
         tabIndex={-1}
         >
         <div className="flex flex-row justify-center">
-            <label className="p-1">
+            <label className="p-2">
             Search By:
-            <select className="p-1" defaultValue={filterValue}>
+            <select className="p-2" defaultValue={filterValue}>
                 {options?.map((option) => {
                 return <option value={option.name} onChange={(e) => {e.preventDefault(); setFilterValue(e.currentTarget.value)} }> {option.name}</option>
                 })}
@@ -37,11 +37,14 @@ return (
             </label>
             
             {/*<div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">*/}
-            <ul className="p-1 flex flex-row">
-            {options?.map((option) => {
-                return <li className="px-2"> <label><input type="checkbox" id={option.id.toString()}/> {option.name}</label>  </li>
-            })}
-            </ul>
+            <label className="p-1 flex flex-row">
+                Appears on: 
+                <ul className="p-1 flex flex-row">
+                {options?.map((option) => {
+                    return <li className="px-2"> <label><input type="checkbox" id={option.id.toString()}/> {option.name}</label>  </li>
+                })}
+                </ul>
+            </label>
         </div>
         
         </motion.div>

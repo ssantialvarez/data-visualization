@@ -3,9 +3,10 @@ import CharacterCard from "../components/CharacterCard";
 import { getCharacters } from "../queries/disneyQueries";
 import { Route } from "../routes/characters";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import { Grid2x2, Rows4 } from "lucide-react";
+import { ViewContext } from "../Contexts";
 
 export default function CharactersHome({ film, tvShow, shortFilm, parkAttraction, videoGame }: { 
     film?: string;
@@ -17,8 +18,8 @@ export default function CharactersHome({ film, tvShow, shortFilm, parkAttraction
 {
     const { ref, inView } = useInView()
     const { name } : {name: string} = Route.useSearch()
-    const [viewValue, setViewValue] = useState(true)
-    
+    const [viewValue, setViewValue] = useState(useContext(ViewContext))
+  
     const {data,
     fetchNextPage,
     hasNextPage,
@@ -56,7 +57,7 @@ export default function CharactersHome({ film, tvShow, shortFilm, parkAttraction
               <div>
                 {totalPages*count} {count == 1 && <>character</>} {count != 1 && <>characters</>} found.
               </div>
-              <div className="sm:invisible md:visible">
+              <div className="invisible lg:visible">
                 <button className="rounded-l-md bg-amber-50 hover:bg-amber-200 p-1" onClick={() => setViewValue(false)}>
                 <Rows4 />
                 </button>
@@ -72,16 +73,18 @@ export default function CharactersHome({ film, tvShow, shortFilm, parkAttraction
               const characters = Array.isArray(group.data) ? group.data : [group.data]; 
 
               return characters.map((char: any) => (
-                <CharacterCard 
-                  key={char._id} 
-                  image={char.imageUrl} 
-                  name={char.name} 
-                  id={char._id} 
-                  tvShows={char.tvShows} 
-                  films={char.films} 
-                  shortFilms={char.shortFilms} 
-                  videogames={char.videoGames} 
-                />
+                <ViewContext.Provider value={viewValue}>
+                  <CharacterCard 
+                    key={char._id} 
+                    image={char.imageUrl} 
+                    name={char.name} 
+                    id={char._id} 
+                    tvShows={char.tvShows} 
+                    films={char.films} 
+                    shortFilms={char.shortFilms} 
+                    videogames={char.videoGames} 
+                  />
+                  </ViewContext.Provider>
               ));
             })}
           </div>
