@@ -1,17 +1,15 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import SearchBar from "./SearchBar";
-import { createContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import FilterBar from "./FilterBar";
+import { SearchContext } from "../Contexts";
 
 
 
 
 const Navbar = (): React.JSX.Element => {
-  const [searchValue, setSearchValue] = useState("");
-  const SearchContext = createContext('')
-
-
+  const [searchValue, setSearchValue] = useState(useContext(SearchContext));
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
 
@@ -29,7 +27,7 @@ return (
     <nav className="fixed top-0 left-0 right-0 bg-snow/95 shadow-md z-10">
       <div className="px-2 lg:px-8">
         <div className="relative flex flex-row h-16 items-center justify-center">
-          <Link to="/characters">
+          <Link to="/characters" onClick={() => setSearchValue("")}>
             <img className="h-10 sm:h-12 w-auto" src="/favicon-32x32-disney.png" alt="Disney Logo" />
           </Link>
           <SearchContext.Provider value={searchValue}>

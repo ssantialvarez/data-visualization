@@ -1,11 +1,12 @@
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { SearchContext } from "../Contexts";
 
 
 
 
 const SearchBar = ({ onSubmit }: { onSubmit: (value: string) => {} }): React.JSX.Element => {
-  const [value, setValue] = useState('') 
+  const [value, setValue] = useState(useContext(SearchContext)) 
 
   return (
     <>
