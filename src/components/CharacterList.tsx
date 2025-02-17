@@ -1,37 +1,20 @@
-import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 
 
 const CharacterList = ({ arr, title }: { arr: string[], title: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="relative inline-block text-left">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        type="button"
-        className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
-        aria-expanded={isOpen}
-        aria-haspopup="true"
-      >
+      
+      <h1 className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset">
         {title}
-        <ChevronDown className="size-5 text-gray-400" />
-      </button>
-
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.1 }}
-          className="z-10 mt-2 w-full origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5"
-        >
-          <ul className="py-1">
-            {arr.length ? arr.map((show) => (<li>{show}</li>)) : <li>None</li>}
-          </ul>
-        </motion.div>
-      )}
+      </h1>
+      
+      <div className="z-10 my-2 w-full origin-top-right rounded-md bg-white ">
+        <ul className="p-1 list-disc list-inside">
+          {arr.length ? arr.map((show) => (<li>{show}</li>)) : <li>None</li>}
+        </ul>
+      </div>
+      
     </div>
   )
 };

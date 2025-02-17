@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import Button from "../components/Button";
 
 
 const random_phrases = [
@@ -19,7 +20,7 @@ export default function Index() {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="bg-snow w-full max-w-lg p-8 opacity-90 rounded-xl shadow-lg text-center">
+      <div className="bg-snow/90 w-full max-w-lg p-8 rounded-xl shadow-lg text-center">
         <h1 className="text-6xl text-black font-bold mb-4">Welcome to Disney API</h1>
         <p className="text-xl italic text-black font-bold mb-6">
           Where dreams come true!
@@ -32,9 +33,8 @@ export default function Index() {
 
         <Link
           to="/characters"
-          className="px-6 py-3 bg-yellow-400 text-blue-900 font-bold rounded-lg shadow-lg opacity-100 hover:bg-yellow-300 transition"
         >
-          Home
+          <Button  disabled={false} title="Home" />
         </Link>
       </div>
     </div>
