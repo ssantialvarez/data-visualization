@@ -8,18 +8,22 @@ import Spinner from "../components/Spinner";
 import { Grid2x2, Rows4 } from "lucide-react";
 import { ViewContext } from "../Contexts";
 
-export default function CharactersHome({ film, tvShow, shortFilm, parkAttraction, videoGame }: { 
-    film?: string;
-    tvShow?: string;
-    shortFilm?: string;
-    parkAttraction?: string;
-    videoGame?: string;
-}) 
+export default function CharactersHome() 
 {
     const { ref, inView } = useInView()
-    const { name } : {name: string} = Route.useSearch()
+    const { name, film, tvShow, shortFilm, parkAttraction, videoGame } : 
+    {
+      name?: string, 
+      film?: string, 
+      tvShow?: string, 
+      shortFilm?: string, 
+      parkAttraction?: string, 
+      videoGame?: string
+    } = Route.useSearch()
     const [viewValue, setViewValue] = useState(useContext(ViewContext))
-  
+    
+    
+
     const {data,
     fetchNextPage,
     hasNextPage,
@@ -52,7 +56,7 @@ export default function CharactersHome({ film, tvShow, shortFilm, parkAttraction
     return (
       <>
         <div className="container mx-auto p-4">
-          <div className="p-4 mb-4 ml-8 mr-8 text-2xl text-bold bg-white/40 shadow-lg rounded-2xl">
+          <div className="p-4 mb-4 ml-8 mr-8 text-2xl text-bold">
             <div className="opacity-100 flex flex-row justify-between">
               <div>
                 {totalPages*count} {count == 1 && <>character</>} {count != 1 && <>characters</>} found.
