@@ -23,12 +23,12 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ image, name, id, tvShows,
     view = 'bg-white opacity-95 shadow-lg rounded-2xl overflow-hidden p-4 h-full flex justify-between relative hover:opacity-100 transition-opacity'
     
     if(viewValue){
-        view = view + "w-80 flex-col"
+        view = view + " w-80 flex-col"
         imageView = "w-full object-cover rounded-lg h-64"
         dataView = "p-4 flex-grow flex flex-col"
     }
     else{
-        view = view + "w-full flex-row"
+        view = view + " w-full flex-row"
         imageView = "w-64 h-full object-cover rounded-lg"
         dataView = "p-4 flex-grow flex flex-row gap-16" 
     }
