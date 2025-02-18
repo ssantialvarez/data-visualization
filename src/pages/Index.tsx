@@ -34,7 +34,7 @@ export default function Index() {
         <Link
           to="/characters"
         >
-          <Button  disabled={false} title="Home" />
+          <Button  disabled={false} title="Lets go!" />
         </Link>
       </div>
     </div>

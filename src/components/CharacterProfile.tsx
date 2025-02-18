@@ -29,7 +29,7 @@ const CharacterCard: React.FC<CharacterProfileProps> = ({
     return (
         <div className="bg-white shadow-lg rounded-2xl py-8 flex flex-col lg:flex-row justify-center items-center h-full">
             <div className="flex justify-center basis-1/2 p-4 w-1/2">
-                <img src={image} alt={name} className="rounded-2xl object-fit h-max w-1/2 ring-1" />
+                <img src={image} alt={name} className="rounded-2xl object-fit md:w-full ring-1" />
             </div>
             
             <div className="flex flex-col p-2 w-2/3">

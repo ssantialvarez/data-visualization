@@ -22,8 +22,6 @@ export default function CharactersHome()
     } = Route.useSearch()
     const [viewValue, setViewValue] = useState(useContext(ViewContext))
     
-    
-
     const {data,
     fetchNextPage,
     hasNextPage,
@@ -31,7 +29,7 @@ export default function CharactersHome()
     isError} = useSuspenseInfiniteQuery(getCharacters({name, film, tvShow, shortFilm, parkAttraction, videoGame}))
   
     if (isLoading) return 
-      <div className="text-center">
+      <div className="size-max text-center">
         <Spinner />
       </div>  
       
@@ -57,15 +55,15 @@ export default function CharactersHome()
       <>
         <div className="container mx-auto p-4">
           <div className="p-4 mb-4 ml-8 mr-8 text-2xl text-bold">
-            <div className="opacity-100 flex flex-row justify-between">
+            <div className="opacity-100 flex flex-row justify-end">
               <div>
-                {totalPages*count} {count == 1 && <>character</>} {count != 1 && <>characters</>} found.
+                {totalPages*count} {count == 1 && <>result</>} {count != 1 && <>results</>}.
               </div>
-              <div className="invisible lg:visible">
-                <button className="rounded-l-md bg-amber-50 hover:bg-amber-200 p-1" onClick={() => setViewValue(false)}>
+              <div className="px-2 invisible lg:visible">
+                <button className="rounded-l-md bg-amber-50 hover:bg-sky-blue p-1" onClick={() => setViewValue(false)}>
                 <Rows4 />
                 </button>
-                <button className="rounded-r-md bg-amber-50 hover:bg-amber-200 p-1" onClick={() => setViewValue(true)}>
+                <button className="rounded-r-md bg-amber-50 hover:bg-sky-blue/90 p-1" onClick={() => setViewValue(true)}>
                 <Grid2x2 />
                 </button>
               </div>
@@ -86,7 +84,8 @@ export default function CharactersHome()
                     tvShows={char.tvShows} 
                     films={char.films} 
                     shortFilms={char.shortFilms} 
-                    videogames={char.videoGames} 
+                    videogames={char.videoGames}
+                    sourceUrl={char.sourceUrl}
                   />
                   </ViewContext.Provider>
               ));

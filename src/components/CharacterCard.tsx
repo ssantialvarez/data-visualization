@@ -11,22 +11,26 @@ interface CharacterCardProps {
   films: string[];
   shortFilms: string[];
   videogames: string[];
+  sourceUrl: string;
 }
 
-const CharacterCard: React.FC<CharacterCardProps> = ({ image, name, id, tvShows, films, shortFilms, videogames }) => {
+const CharacterCard: React.FC<CharacterCardProps> = ({ image, name, id, tvShows, films, shortFilms, videogames, sourceUrl }) => {
     const viewValue = useContext(ViewContext)
     if(!image) 
         image = '/placeholder-no-image.jpg'
+    
     let view, imageView, dataView;
+    view = 'bg-white opacity-95 shadow-lg rounded-2xl overflow-hidden p-4 h-full flex justify-between relative hover:opacity-100 transition-opacity'
+    
     if(viewValue){
-        view = "bg-white opacity-95 shadow-lg rounded-2xl overflow-hidden p-4 w-80 h-full flex flex-col justify-between relative hover:opacity-100 transition-opacity"
+        view = view + "w-80 flex-col"
         imageView = "w-full object-cover rounded-lg h-64"
         dataView = "p-4 flex-grow flex flex-col"
     }
     else{
-        view = "bg-white opacity-95 shadow-lg rounded-2xl overflow-hidden p-4 w-full h-full flex flex-row justify-between relative hover:opacity-100 transition-opacity"
+        view = view + "w-full flex-row"
         imageView = "w-64 h-full object-cover rounded-lg"
-        dataView = "p-4 flex-grow flex flex-row justify-around" 
+        dataView = "p-4 flex-grow flex flex-row gap-16" 
     }
 
 
@@ -34,36 +38,20 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ image, name, id, tvShows,
         <>
             <div className={view}>
             <div className="flex flex-col">
+                <Link to={sourceUrl}>
                 <img src={image} alt={name} className={imageView} />
-                <h1 className="text-2xl text-center font-bold mt-4">{name}</h1>
+                </Link>
             </div>
-            {/* Character data */}
-            <div className={dataView}>
-                <div>
-                <h2 className="text-gray-600">TV Shows:</h2>
-                <ul className="list-disc list-inside text-gray-800">
-                    {tvShows.length ? ( viewValue ? <li>{tvShows[0]}</li> : tvShows.map((show) => (<li>{show}</li>))): <li>None</li>}
-                </ul>
-                </div>
-                <div>
-                <h2 className="text-gray-600">Films:</h2>
-                <ul className="list-disc list-inside text-gray-800">
-                    {films.length ? ( viewValue ? <li>{films[0]}</li> : films.map((show) => (<li>{show}</li>))): <li>None</li>}
-                </ul>
-                </div>
-                <div>
-                <h2 className="text-gray-600">Short Films:</h2>
-                <ul className="list-disc list-inside text-gray-800">
-                    {shortFilms.length ? ( viewValue ? <li>{shortFilms[0]}</li> : shortFilms.map((show) => (<li>{show}</li>))) : <li>None</li>}
-                </ul>
-                </div>
-                <div>
-                <h2 className="text-gray-600">VideoGames:</h2>
-                <ul className="list-disc list-inside text-gray-800">
-                    {videogames.length ? ( viewValue ? <li>{videogames[0]}</li> : videogames.map((show) => (<li>{show}</li>))): <li>None</li>}
-                </ul>
+                <div className="flex flex-col">
+                <h1 className="text-4xl text-center font-bold mt-4">{name}</h1>
+                <div className={dataView}>
+                    <List arr={tvShows} viewValue={viewValue} title="TV Shows"/>
+                    <List arr={films} viewValue={viewValue} title="Films"/>
+                    <List arr={shortFilms} viewValue={viewValue} title="Short Films"/>                
+                    <List arr={videogames} viewValue={viewValue} title="VideoGames"/>
                 </div>
             </div>
+            
 
             <div className="self-center pb-4">
                 <Link to={'/characters/' + id}>
@@ -77,3 +65,17 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ image, name, id, tvShows,
 };
 
 export default CharacterCard;
+
+
+const List = ({ arr, viewValue, title } : { arr: string[], viewValue: boolean, title: string }) => {
+    
+    return (
+        <div>
+            <h2 className="text-gray-600 text-2xl">{title}:</h2>
+            <ul className="list-disc list-inside text-gray-800 text-2xl">
+                {arr.length ? ( viewValue ? <li>{arr[0]}</li> : arr.map((show) => (<li>{show}</li>))): <li>None</li>}
+            </ul>
+        </div>
+    );
+};
+

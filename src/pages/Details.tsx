@@ -3,13 +3,13 @@ import { Route } from "../routes/characters/$id";
 
 export default function Details() {
     
-    const data = Route.useLoaderData(); // Obtains preload data
+    const data = Route.useLoaderData(); 
 
     if (!data) {
       return <span>Error: No se encontraron datos</span>;
     }
-    console.log(data)
-    // We can assume by this point that `isSuccess === true`
+    
+    
     return (
       <div className="container mx-auto p-4">
       <CharacterProfile 
